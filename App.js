@@ -1,21 +1,43 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import Page1Screen from './screens/Page1Screen';
+import Page1DetailScreen from './screens/Page1DetailScreen';
+import Page2Screen from './screens/Page2Screen';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const MainStack = createStackNavigator(
+  {
+    Page1: Page1Screen,
+    Page1Detail: Page1DetailScreen
+  }
+);
+
+const MainStack2 = createStackNavigator(
+  {
+    Page2: Page2Screen
+  }
+);
+
+const TabNavigator = createBottomTabNavigator(
+  {
+    Page1: MainStack,
+    Page2: MainStack2
   },
-});
+  {
+    initialRouteName: 'Page1'
+  }
+);
+
+const AppContainer = createAppContainer(TabNavigator);
+
+export default class App extends React.Component {
+  render() {
+    return (
+      <AppContainer />
+    );
+  }
+}
