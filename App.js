@@ -1,10 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { Provider } from 'react-redux';
 
+import store from './store';
 import Page1Screen from './screens/Page1Screen';
 import Page1DetailScreen from './screens/Page1DetailScreen';
 import Page2Screen from './screens/Page2Screen';
@@ -37,7 +37,9 @@ const AppContainer = createAppContainer(TabNavigator);
 export default class App extends React.Component {
   render() {
     return (
-      <AppContainer />
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
     );
   }
 }
